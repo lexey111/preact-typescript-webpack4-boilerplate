@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist",
+		"target": "es5",
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"noImplicitAny": false,
+		"removeComments": true,
+		"sourceMap": true,
+		"jsx": "react",
+		"jsxFactory": "h"
+	},
+	"suppressImplicitAnyIndexErrors": true,
+	"lib": [
+		"dom",
+		"es2017"
+	],
+	"baseUrl": ".",
+	"exclude": [
+		"dist"
+	]
+}

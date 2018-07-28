@@ -1,0 +1,45 @@
+{
+	"name": "preact-typescript-webpack4-boilerplate",
+	"version": "1.0.0",
+	"description": "Preact training app",
+	"scripts": {
+		"build": "npm run clean && webpack --config ./webpack.config.js --mode production --progress",
+		"dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
+		"start": "webpack-dev-server --config ./webpack.config.js --mode development",
+		"clean": "rimraf ./dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lexey111/preact-typescript-webpack4-boilerplate.git"
+	},
+
+	"keywords": [
+		"preact",
+		"typescript",
+		"less",
+		"boilerplate",
+		"webpack 4"
+	],
+	"alias": {
+		"preact": "./node_modules/preact/dist/preact.min.js"
+	},
+	"author": "lexey111 <lexey111@gmail.com>",
+	"license": "ISC",
+	"dependencies": {
+		"preact": "^8.2.9"
+	},
+	"devDependencies": {
+		"copy-webpack-plugin": "^4.5.2",
+		"file-loader": "^1.1.11",
+		"fork-ts-checker-webpack-plugin": "^0.4.3",
+		"less": "^3.8.0",
+		"less-loader": "^4.1.0",
+		"less-plugin-clean-css": "^1.5.1",
+		"rimraf": "^2.6.2",
+		"ts-loader": "^4.4.2",
+		"typescript": "^2.9.2",
+		"webpack": "^4.16.3",
+		"webpack-cli": "^3.1.0",
+		"webpack-dev-server": "^3.1.5"
+	}
+}
