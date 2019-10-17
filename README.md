@@ -25,10 +25,10 @@ Installation
 
 Also, Windows shortcuts are here. See `*.bat` files.
 
-# Screenshot of the compiled app
+### Screenshot
 
 ![screenshot](screenshot.png)
 
-# Camera asset credit
+### Credit
 
 [photo-camera-with-a-flash](https://www.svgrepo.com/svg/5111/photo-camera-with-a-flash)
