@@ -1,4 +1,5 @@
 import {Component, h} from 'preact';
+import Counter from "./components/counter/Counter";
 
 export interface AppProps {
 	title: string;
@@ -33,6 +34,7 @@ export class App extends Component<AppProps, AppState> {
 			<p>
 				{state.title}
 			</p>
+			<Counter />
 			<h2>Under the hood</h2>
 			<ul>
 				<li><a href="https://preactjs.com/">Preact</a></li>

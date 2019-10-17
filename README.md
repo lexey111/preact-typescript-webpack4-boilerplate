@@ -1,6 +1,8 @@
 Preact + Typesript + Webpack 4 + LESS / boilerplate
 ===
 
+Preact v10.0 with hooks demo
+
 Things under the hood:
 ---
 * [Preact](https://preactjs.com/)
@@ -22,3 +24,10 @@ Installation
     * `npm run start` for live server on `http://localhost:3030/`
 
 Also, Windows shortcuts are here. See `*.bat` files.
+
+Screenshot of the compiled app
+![screenshot](screenshot.png)
+
+# Camera asset credit
+
+[photo-camera-with-a-flash](https://www.svgrepo.com/svg/5111/photo-camera-with-a-flash)
