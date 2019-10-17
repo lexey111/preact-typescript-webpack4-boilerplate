@@ -25,7 +25,8 @@ Installation
 
 Also, Windows shortcuts are here. See `*.bat` files.
 
-Screenshot of the compiled app
+# Screenshot of the compiled app
+
 ![screenshot](screenshot.png)
 
 # Camera asset credit
