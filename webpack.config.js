@@ -86,6 +86,7 @@ module.exports = (env, args) => {
 			contentBase: './dist',
 			compress: true,
 			port: 3030,
+			historyApiFallback: true,
 		},
 		plugins: [
 			new ForkTsCheckerWebpackPlugin(),
