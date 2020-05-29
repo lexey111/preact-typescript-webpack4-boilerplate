@@ -4,6 +4,7 @@
 	"description": "Preact training app",
 	"scripts": {
 		"build": "npm run clean && webpack --config ./webpack.config.js --mode production --progress",
+		"postbuild": "react-snap",
 		"dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
 		"start": "webpack-dev-server --config ./webpack.config.js --mode development",
 		"clean": "rimraf ./dist"
@@ -34,11 +35,15 @@
 		"less": "3.10.3",
 		"less-loader": "5.0.0",
 		"less-plugin-clean-css": "1.5.1",
+		"react-snap": "1.23.0",
 		"rimraf": "3.0.0",
 		"ts-loader": "6.2.0",
 		"typescript": "3.6.4",
 		"webpack": "4.41.2",
 		"webpack-cli": "3.3.9",
 		"webpack-dev-server": "3.7.1"
+	},
+	"reactSnap": {
+		"source": "dist"
 	}
 }
