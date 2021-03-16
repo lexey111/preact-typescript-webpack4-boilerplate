@@ -1,0 +1,9 @@
+version: '3'
+services:
+  preact-boilerplate:
+    working_dir: /app
+    build: .
+    command: npm run build
+    volumes:
+      - ./:/app
+      - /app/node_modules

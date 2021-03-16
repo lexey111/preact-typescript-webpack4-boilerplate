@@ -1,40 +1,26 @@
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanCSSPlugin = require('less-plugin-clean-css');
+const webpack = require('webpack');
 const path = require('path');
 
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = (env, args) => {
-	let production = false;
+	const isProduction = args && args['mode'] === 'production';
+	console.log('');
+	console.log(isProduction ? 'PRODUCTION BUILD' : 'DEVELOPMENT BUILD');
+	console.log('');
 
-	if (args && args.mode === 'production') {
-		production = true;
-		console.log('== Production mode');
-	} else {
-		console.log('== Development mode');
-	}
 
-	const lessLoader = production
-		? {
-			loader: 'less-loader',
-			options: {
-				plugins: [
-					new CleanCSSPlugin({advanced: true})
-				]
-			}
-		}
-		: {
-			loader: 'less-loader',
-		};
-
-	return {
+	const config = {
 		entry: {
-			'scripts/main': './src/bootstrap.tsx',
+			'scripts/main': path.resolve('./src/bootstrap.tsx'),
 		},
 		output: {
 			path: path.resolve('./dist'),
 		},
 		target: 'web',
-		devtool: production ? false : 'source-map',
+		devtool: isProduction ? false : 'source-map',
 		optimization: {
 			splitChunks: {
 				// always create vendor.js
@@ -54,6 +40,20 @@ module.exports = (env, args) => {
 		module: {
 			rules: [
 				{
+					test: /\.(ts|tsx)$/,
+					// eslint
+					enforce: 'pre',
+					use: [
+						{
+							options: {
+								eslintPath: require.resolve('eslint'),
+							},
+							loader: require.resolve('eslint-loader'),
+						},
+					],
+					exclude: /node_modules/,
+				},
+				{
 					test: /\.tsx?$/,
 					exclude: /node_modules/,
 					use: [{
@@ -70,35 +70,65 @@ module.exports = (env, args) => {
 						{
 							loader: 'file-loader',
 							options: {
-								name: 'styles/app/[name].css',
+								name: 'styles/[name].css',
 							}
 
 						},
-						lessLoader
+						{
+							loader: 'less-loader',
+						}
 					]
 				},
 			],
 		},
+
+		watchOptions: {
+			aggregateTimeout: 100,
+			ignored: /node_modules/,
+			poll: 300
+		},
+
 		devServer: {
 			headers: {
 				'Access-Control-Allow-Origin': '*'
 			},
 			contentBase: './dist',
-			compress: true,
+			publicPath: '/',
+			compress: false,
 			port: 3030,
 			historyApiFallback: true,
+			hot: true,
+			inline: true,
+			stats: 'normal',
+			clientLogLevel: 'error'
 		},
+
 		plugins: [
-			new ForkTsCheckerWebpackPlugin(),
-			new CopyWebpackPlugin([
-				// static files to the site root folder (index and robots)
-				{
-					from: './src/static/**/*',
-					to: path.resolve('./dist/'),
-					toType: 'dir',
-					flatten: true
-				},
-			]),
+			new webpack.EnvironmentPlugin({
+				NODE_ENV: isProduction ? 'production' : 'development',
+				DEBUG: !isProduction
+			}),
+
+			new CopyWebpackPlugin({
+				patterns: [
+					// static files to the site root folder (index and robots)
+					{
+						from: '**/*',
+						to: path.resolve('./dist/'),
+						context: './src/static/'
+					},
+				]
+			}),
 		],
 	};
+
+	if (isProduction) {
+		config.optimization.minimize = true;
+		config.optimization.minimizer = [
+			new TerserPlugin({extractComments: false}),
+			new OptimizeCSSAssetsPlugin({}),
+		]
+	}
+
+	return config;
 };
