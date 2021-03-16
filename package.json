@@ -1,12 +1,13 @@
 {
 	"name": "preact-typescript-webpack4-boilerplate",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "Preact training app",
 	"scripts": {
 		"build": "npm run clean && webpack --config ./webpack.config.js --mode production --progress",
 		"postbuild": "react-snap",
 		"dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
-		"start": "webpack-dev-server --config ./webpack.config.js --mode development",
+		"dev:watch": "npm run clean && webpack --config ./webpack.config.js --mode development --watch",
+		"start": "webpack serve --config ./webpack.config.js --mode development --host 0.0.0.0",
 		"clean": "rimraf ./dist"
 	},
 	"repository": {
@@ -18,7 +19,7 @@
 		"typescript",
 		"less",
 		"boilerplate",
-		"webpack 4"
+		"webpack 5"
 	],
 	"alias": {
 		"preact": "./node_modules/preact/dist/preact.min.js"
@@ -26,24 +27,39 @@
 	"author": "lexey111 <lexey111@gmail.com>",
 	"license": "ISC",
 	"dependencies": {
-		"preact": "10.0.0"
+		"preact": "^10.5.13"
 	},
 	"devDependencies": {
-		"copy-webpack-plugin": "5.0.4",
-		"file-loader": "4.2.0",
-		"fork-ts-checker-webpack-plugin": "1.5.1",
-		"less": "3.10.3",
-		"less-loader": "5.0.0",
-		"less-plugin-clean-css": "1.5.1",
-		"react-snap": "1.23.0",
-		"rimraf": "3.0.0",
-		"ts-loader": "6.2.0",
-		"typescript": "3.6.4",
-		"webpack": "4.41.2",
-		"webpack-cli": "3.3.9",
-		"webpack-dev-server": "3.7.1"
+		"@types/webpack": "^4.41.26",
+		"@typescript-eslint/eslint-plugin": "^4.17.0",
+		"@typescript-eslint/parser": "^4.17.0",
+		"copy-webpack-plugin": "^8.0.0",
+		"css-loader": "^5.1.2",
+		"eslint": "^7.21.0",
+		"eslint-config-standard-preact": "^1.1.6",
+		"eslint-loader": "^4.0.2",
+		"eslint-plugin-optimize-regex": "^1.2.0",
+		"eslint-plugin-preact": "^0.1.0",
+		"eslint-plugin-promise": "^4.3.1",
+		"eslint-plugin-sonarjs": "^0.6.0",
+		"file-loader": "^6.2.0",
+		"less": "^4.1.1",
+		"less-loader": "^8.0.0",
+		"less-plugin-clean-css": "^1.5.1",
+		"optimize-css-assets-webpack-plugin": "^5.0.4",
+		"react-snap": "^1.23.0",
+		"rimraf": "^3.0.2",
+		"ts-loader": "^8.0.18",
+		"typescript": "^4.2.3",
+		"webpack": "^5.26.1",
+		"webpack-cli": "^4.5.0",
+		"webpack-dev-server": "^3.11.2"
 	},
 	"reactSnap": {
-		"source": "dist"
+		"source": "dist",
+		"puppeteerArgs": [
+			"--no-sandbox",
+			"--disable-setuid-sandbox"
+		]
 	}
 }

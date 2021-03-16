@@ -1,30 +1,31 @@
-import { h } from "preact"
-import { DefaultHome } from "./components/home/Home"
-import Page from "./components/page/Page"
-import Nested from "./components/nested/Nested"
-import { NotFound } from "./NotFound"
+import {h, JSX} from 'preact';
+import {DefaultHome} from './components/home/Home';
+import {Nested} from './components/nested/Nested';
+import {Page} from './components/page/Page';
+import {NotFound} from './NotFound';
 
 
-const routes = {
-  "": {
-    content: () => <DefaultHome />
-  },
-  "/page": {
-    content: () => <Page />
-  },
-  "/page/nested": {
-    content: () => <Nested />
-  },
-}
+type TRoute = {
+	content: () => JSX.Element
+};
+
+const routes: Record<string, TRoute> = {
+	'': {
+		content: () => <DefaultHome/>
+	},
+	'/page': {
+		content: () => <Page/>
+	},
+	'/page/nested': {
+		content: () => <Nested/>
+	},
+};
 
 
-export function router (location: Location)
-{
-  const path = location.pathname.replace(/\/$/,"")
+export function router(location: Location): JSX.Element {
+	const path = location.pathname.replace(/\/$/, '');
 
-  const route = routes[path]
+	const route: { content: () => JSX.Element } = routes[path];
 
-  const content = route ? route.content() : <NotFound />
-
-  return content
+	return route ? route.content() : <NotFound/>;
 }

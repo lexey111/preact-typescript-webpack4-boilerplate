@@ -1,0 +1,15 @@
+version: '3'
+services:
+  preact-boilerplate:
+    working_dir: /app
+    build: .
+    command: npm run dev:watch
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    tty: true
+    ports:
+      - 3030:3030
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
