@@ -35,7 +35,7 @@
 		"@typescript-eslint/parser": "^4.17.0",
 		"copy-webpack-plugin": "^8.0.0",
 		"css-loader": "^5.1.2",
-		"eslint": "^7.21.0",
+		"eslint": "^7.22.0",
 		"eslint-config-standard-preact": "^1.1.6",
 		"eslint-loader": "^4.0.2",
 		"eslint-plugin-optimize-regex": "^1.2.0",
